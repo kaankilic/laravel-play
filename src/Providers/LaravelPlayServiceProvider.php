@@ -30,7 +30,7 @@ class LaravelPlayServiceProvider extends ServiceProvider
 	{
 		$this->app->register(RouteServiceProvider::class);
 		$this->commands([
-			\Modules\LaravelPlay\Console\AppInstall::class
+			\Kaankilic\LaravelPlay\Console\AppInstall::class
 		]);
 	}
 
@@ -56,7 +56,7 @@ class LaravelPlayServiceProvider extends ServiceProvider
 	*/
 	public function registerViews()
 	{
-		$viewPath = resource_path('views/modules/laravelplay');
+		$viewPath = resource_path('views/Kaankilic/laravelplay');
 
 		$sourcePath = __DIR__.'/../Resources/views';
 
@@ -65,7 +65,7 @@ class LaravelPlayServiceProvider extends ServiceProvider
 		],'views');
 
 		$this->loadViewsFrom(array_merge(array_map(function ($path) {
-			return $path . '/modules/laravelplay';
+			return $path . '/Kaankilic/laravelplay';
 		}, \Config::get('view.paths')), [$sourcePath]), 'laravelplay');
 	}
 
@@ -76,7 +76,7 @@ class LaravelPlayServiceProvider extends ServiceProvider
 	*/
 	public function registerTranslations()
 	{
-		$langPath = resource_path('lang/modules/laravelplay');
+		$langPath = resource_path('lang/Kaankilic/laravelplay');
 
 		if (is_dir($langPath)) {
 			$this->loadTranslationsFrom($langPath, 'laravelplay');
