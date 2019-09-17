@@ -67,6 +67,9 @@ class LaravelPlayServiceProvider extends ServiceProvider
 		$this->loadViewsFrom(array_merge(array_map(function ($path) {
 			return $path . '/Kaankilic/laravelplay';
 		}, \Config::get('view.paths')), [$sourcePath]), 'laravelplay');
+		$this->publishes([
+			__DIR__.'/../Resources/assets' => public_path('vendor/laravel-play'),
+		], 'public');
 	}
 
 	/**
