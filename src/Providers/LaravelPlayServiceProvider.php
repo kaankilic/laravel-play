@@ -68,7 +68,7 @@ class LaravelPlayServiceProvider extends ServiceProvider
 			return $path . '/Kaankilic/laravelplay';
 		}, \Config::get('view.paths')), [$sourcePath]), 'laravelplay');
 		$this->publishes([
-			__DIR__.'/../Resources/assets' => public_path('vendor/laravel-play'),
+			__DIR__.'/../../assets' => public_path('vendor/laravel-play'),
 		], 'public');
 	}
 
