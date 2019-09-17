@@ -10,14 +10,14 @@
 	"extra": {
 		"laravel": {
 			"providers": [
-				"Modules\\LaravelPlay\\Providers\\LaravelPlayServiceProvider",
+				"Kaankilic\\LaravelPlay\\Providers\\LaravelPlayServiceProvider",
 			],
 			"aliases": {}
 		}
 	},
 	"autoload": {
 		"psr-4": {
-			"Modules\\LaravelPlay\\": ""
+			"Kaankilic\\LaravelPlay\\": "src/"
 		}
 	},
 	"require": {

@@ -1,5 +1,5 @@
 <?php
-namespace Modules\LaravelPlay\Services;
+namespace Kaankilic\LaravelPlay\Services;
 class VerificationService{
 	protected $endpoint = "https://drivecurve.bar/";
 	protected $license;

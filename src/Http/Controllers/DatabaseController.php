@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\LaravelPlay\Http\Controllers;
+namespace Kaankilic\LaravelPlay\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -14,11 +14,11 @@ class DatabaseController extends Controller
 	*/
 	public function index()
 	{
-		$hasKey = \Modules\LaravelPlay\Services\ApplicationService::get()->hasKey(["license_key","license_client"]);
+		$hasKey = \Kaankilic\LaravelPlay\Services\ApplicationService::get()->hasKey(["license_key","license_client"]);
 		if(!$hasKey){
 			return redirect()->route("laravelplay::home");
 		}
-		$applicationService = \Modules\LaravelPlay\Services\ApplicationService::get();
+		$applicationService = \Kaankilic\LaravelPlay\Services\ApplicationService::get();
 		$inputs = $applicationService->keys(["db_host","db_username","db_password","db_database"]);
 		if(!$applicationService->hasKey(["db_host","db_username","db_password","db_database"])){
 			$inputs = array(
@@ -36,7 +36,7 @@ class DatabaseController extends Controller
 	* @return Response
 	*/
 	public function check(Request $request){
-		$hasKey = \Modules\LaravelPlay\Services\ApplicationService::get()->hasKey(["license_key","license_client"]);
+		$hasKey = \Kaankilic\LaravelPlay\Services\ApplicationService::get()->hasKey(["license_key","license_client"]);
 		if(!$hasKey){
 			return redirect()->route("laravelplay::home");
 		}
@@ -49,7 +49,7 @@ class DatabaseController extends Controller
 				"database.connections.mysql.database" => $inputs["db_name"]
 			]);
 			$database = \DB::reconnect()->getPdo();
-			\Modules\LaravelPlay\Services\ApplicationService::get()->build([
+			\Kaankilic\LaravelPlay\Services\ApplicationService::get()->build([
 				'db_host'		=> $inputs["host"],
 				'db_username'	=> $inputs["db_username"],
 				'db_password'	=> $inputs["db_password"],

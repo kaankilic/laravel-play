@@ -1,5 +1,5 @@
 <?php
-namespace Modules\LaravelPlay\Services;
+namespace Kaankilic\LaravelPlay\Services;
 
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;

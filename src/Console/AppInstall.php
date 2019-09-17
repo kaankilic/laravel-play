@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\LaravelPlay\Console;
+namespace Kaankilic\LaravelPlay\Console;
 
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
@@ -38,7 +38,7 @@ class AppInstall extends Command
 	* @return mixed
 	*/
 	public function handle(){
-		$this->applicationService = \Modules\LaravelPlay\Services\ApplicationService::get();
+		$this->applicationService = \Kaankilic\LaravelPlay\Services\ApplicationService::get();
 		$this->line("Welcome to CLI installation of the ".config('app.name').".");
 		$this->line("Lets start to check your miniumum requirements.");
 		$this->isAppReady();
@@ -51,10 +51,10 @@ class AppInstall extends Command
 	}
 
 	public function isAppReady(){
-		$checkRequired = new \Modules\LaravelPlay\Services\RequirementService();
+		$checkRequired = new \Kaankilic\LaravelPlay\Services\RequirementService();
 		$requirements = $checkRequired->check(config("laravelplay.requirements"));
 		$minVersion = $checkRequired->checkPHPversion(config("laravelplay.minPhpVersion"));
-		$checkPermission = new \Modules\LaravelPlay\Services\PermissionService();
+		$checkPermission = new \Kaankilic\LaravelPlay\Services\PermissionService();
 		$permissions = $checkPermission->check(
 			config('laravelplay.permissions')
 		);
@@ -83,7 +83,7 @@ class AppInstall extends Command
 		if(!$this->confirm("Please confirm that the information above is totally correct.",true)){
 			return ;
 		}
-		$hasValidLicense = \Modules\LaravelPlay\Services\LicenseService::setServer("https://verify.kaankilic.com")->setLicenseKey($licenseKey)->setClient($licenseClient)->hasValidLicense();
+		$hasValidLicense = \Kaankilic\LaravelPlay\Services\LicenseService::setServer("https://verify.kaankilic.com")->setLicenseKey($licenseKey)->setClient($licenseClient)->hasValidLicense();
 		if(!$hasValidLicense){
 			$this->error("Invalid license key. Please check your license key.");
 			return false;
@@ -174,7 +174,7 @@ class AppInstall extends Command
 		if(!$this->confirm("Please confirm that the information above is totally correct.",true)){
 			return ;
 		}
-		\Modules\LaravelPlay\Services\EnviromentService::build($this->applicationService->toArray());
+		\Kaankilic\LaravelPlay\Services\EnviromentService::build($this->applicationService->toArray());
 		$output = new BufferedOutput();
 		Artisan::call('migrate:fresh',[
 			'--force' => true

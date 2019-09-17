@@ -1,1 +1,3 @@
 module.json
+composer.lock
+package-lock.json

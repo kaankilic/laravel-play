@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\LaravelPlay\Providers;
+namespace Kaankilic\LaravelPlay\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;

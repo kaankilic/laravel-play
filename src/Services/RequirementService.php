@@ -1,5 +1,5 @@
 <?php
-namespace Modules\LaravelPlay\Services;
+namespace Kaankilic\LaravelPlay\Services;
 class RequirementService{
 	private $minVersion = '7.0.0';
 	public function check(array $requirements){

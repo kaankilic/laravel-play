@@ -1,5 +1,5 @@
 <?php
-namespace Modules\LaravelPlay\Services;
+namespace Kaankilic\LaravelPlay\Services;
 use Illuminate\Filesystem\Filesystem;
 class ApplicationService{
 	protected const APPLICATION_FILE = "app.json";

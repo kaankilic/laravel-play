@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\LaravelPlay\Http\Controllers;
+namespace Kaankilic\LaravelPlay\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -13,10 +13,10 @@ class VerificationController extends Controller
 	* @return Response
 	*/
 	public function index(){
-		$checkRequired = new \Modules\LaravelPlay\Services\RequirementService();
+		$checkRequired = new \Kaankilic\LaravelPlay\Services\RequirementService();
 		$requirements = $checkRequired->check(config("laravelplay.requirements"));
 		$minVersion = $checkRequired->checkPHPversion(config("laravelplay.minPhpVersion"));
-		$checkPermission = new \Modules\LaravelPlay\Services\PermissionService();
+		$checkPermission = new \Kaankilic\LaravelPlay\Services\PermissionService();
 		$permissions = $checkPermission->check(
 			config('laravelplay.permissions')
 		);
@@ -24,7 +24,7 @@ class VerificationController extends Controller
 		if(!$isReady){
 			return redirect()->to("/laravelplay");
 		}
-		$applicationService = \Modules\LaravelPlay\Services\ApplicationService::get();
+		$applicationService = \Kaankilic\LaravelPlay\Services\ApplicationService::get();
 		$inputs = $applicationService->keys(["license_key","license_client"]);
 		if(!$applicationService->hasKey(["license_key","license_client"])){
 			$inputs = array(
@@ -41,10 +41,10 @@ class VerificationController extends Controller
 	*/
 	public function check(Request $request){
 		$inputs = $request->only(["license_key","client"]);
-		$checkRequired = new \Modules\LaravelPlay\Services\RequirementService();
+		$checkRequired = new \Kaankilic\LaravelPlay\Services\RequirementService();
 		$requirements = $checkRequired->check(config("laravelplay.requirements"));
 		$minVersion = $checkRequired->checkPHPversion(config("laravelplay.minPhpVersion"));
-		$checkPermission = new \Modules\LaravelPlay\Services\PermissionService();
+		$checkPermission = new \Kaankilic\LaravelPlay\Services\PermissionService();
 		$permissions = $checkPermission->check(
 			config('laravelplay.permissions')
 		);
@@ -52,11 +52,11 @@ class VerificationController extends Controller
 		if(!$isReady){
 			return redirect()->to("/laravelplay");
 		}
-		$hasValidLicense = \Modules\LaravelPlay\Services\LicenseService::setLicenseKey($inputs["license_key"])->setClient($inputs["client"])->hasValidLicense();
+		$hasValidLicense = \Kaankilic\LaravelPlay\Services\LicenseService::setLicenseKey($inputs["license_key"])->setClient($inputs["client"])->hasValidLicense();
 		if(!$hasValidLicense){
 			return redirect()->back()->with("error-message","License key and client is not verified by the license server. If you sure that you have a correct keys, contact with product owner.");
 		}
-		\Modules\LaravelPlay\Services\ApplicationService::get()->build([
+		\Kaankilic\LaravelPlay\Services\ApplicationService::get()->build([
 			'license_key'		=> $inputs["license_key"],
 			'license_client'	=> $inputs["client"]
 		]);

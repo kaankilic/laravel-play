@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\LaravelPlay\Http\Controllers;
+namespace Kaankilic\LaravelPlay\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -14,10 +14,10 @@ class LaravelPlayController extends Controller
 	*/
 	public function index()
 	{
-		$checkRequired = new \Modules\LaravelPlay\Services\RequirementService();
+		$checkRequired = new \Kaankilic\LaravelPlay\Services\RequirementService();
 		$requirements = $checkRequired->check(config("laravelplay.requirements"));
 		$minVersion = $checkRequired->checkPHPversion(config("laravelplay.minPhpVersion"));
-		$checkPermission = new \Modules\LaravelPlay\Services\PermissionService();
+		$checkPermission = new \Kaankilic\LaravelPlay\Services\PermissionService();
 		$permissions = $checkPermission->check(
 			config('laravelplay.permissions')
 		);

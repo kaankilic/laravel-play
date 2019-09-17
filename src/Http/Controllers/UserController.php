@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\LaravelPlay\Http\Controllers;
+namespace Kaankilic\LaravelPlay\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -14,7 +14,7 @@ class UserController extends Controller
 	*/
 	public function index()
 	{
-		$hasKey = \Modules\LaravelPlay\Services\ApplicationService::get()->hasKey(["db_host","db_database","db_username","db_password","app_name","app_url"]);
+		$hasKey = \Kaankilic\LaravelPlay\Services\ApplicationService::get()->hasKey(["db_host","db_database","db_username","db_password","app_name","app_url"]);
 		if(!$hasKey){
 			return redirect()->route("laravelplay::home");
 		}
@@ -26,7 +26,7 @@ class UserController extends Controller
 	* @return Response
 	*/
 	public function create(Request $request){
-		$hasKey = \Modules\LaravelPlay\Services\ApplicationService::get()->hasKey(["db_host","db_database","db_username","db_password","app_name","app_url"]);
+		$hasKey = \Kaankilic\LaravelPlay\Services\ApplicationService::get()->hasKey(["db_host","db_database","db_username","db_password","app_name","app_url"]);
 		if(!$hasKey){
 			return redirect()->route("laravelplay::home");
 		}
@@ -36,7 +36,7 @@ class UserController extends Controller
 			'email' => $inputs['email'],
 			'password' => bcrypt($inputs['password'])
 		]);
-		\Modules\LaravelPlay\Services\ApplicationService::get()->delete();
+		\Kaankilic\LaravelPlay\Services\ApplicationService::get()->delete();
 		return redirect()->to("/");
 	}
 }

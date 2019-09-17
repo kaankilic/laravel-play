@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\LaravelPlay\Providers;
+namespace Kaankilic\LaravelPlay\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;

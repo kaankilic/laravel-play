@@ -1,5 +1,5 @@
 <?php
-namespace Modules\LaravelPlay\Services;
+namespace Kaankilic\LaravelPlay\Services;
 class PermissionService{
 	/**
 	* @var array
@@ -56,7 +56,7 @@ class PermissionService{
 			'isSet' => $isSet,
 		]);
 	}
-	
+
 	/**
 	* Add the file and set the errors.
 	*

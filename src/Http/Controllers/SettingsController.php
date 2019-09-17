@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\LaravelPlay\Http\Controllers;
+namespace Kaankilic\LaravelPlay\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -14,7 +14,7 @@ class SettingsController extends Controller
 	* @return Response
 	*/
 	public function index(){
-		$applicationService = \Modules\LaravelPlay\Services\ApplicationService::get();
+		$applicationService = \Kaankilic\LaravelPlay\Services\ApplicationService::get();
 		if(!$applicationService->hasKey(["db_host","db_database","db_username","db_password"])){
 			return redirect()->route("laravelplay::home");
 		}
@@ -33,17 +33,17 @@ class SettingsController extends Controller
 	* @return Response
 	*/
 	public function check(Request $request){
-		$hasKey = \Modules\LaravelPlay\Services\ApplicationService::get()->hasKey(["db_host","db_database","db_username","db_password"]);
+		$hasKey = \Kaankilic\LaravelPlay\Services\ApplicationService::get()->hasKey(["db_host","db_database","db_username","db_password"]);
 		if(!$hasKey){
 			return redirect()->route("laravelplay::home");
 		}
 		$inputs = $request->only(["app_name","app_url"]);
-		$application = \Modules\LaravelPlay\Services\ApplicationService::get()->build([
+		$application = \Kaankilic\LaravelPlay\Services\ApplicationService::get()->build([
 			'app_env'		=> 'local',
 			'app_name'		=> $inputs["app_name"],
 			'app_url'		=> $inputs["app_url"]
 		]);
-		\Modules\LaravelPlay\Services\EnviromentService::build(\Modules\LaravelPlay\Services\ApplicationService::get()->toArray());
+		\Kaankilic\LaravelPlay\Services\EnviromentService::build(\Kaankilic\LaravelPlay\Services\ApplicationService::get()->toArray());
 		$output = new BufferedOutput();
 		Artisan::call('migrate:fresh',[
 			'--force' => true

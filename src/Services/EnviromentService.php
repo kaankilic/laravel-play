@@ -1,5 +1,5 @@
 <?php
-namespace Modules\LaravelPlay\Services;
+namespace Kaankilic\LaravelPlay\Services;
 use Illuminate\Filesystem\Filesystem;
 use Artisan;
 use Symfony\Component\Console\Output\BufferedOutput;
