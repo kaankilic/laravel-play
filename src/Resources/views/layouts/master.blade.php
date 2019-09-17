@@ -55,6 +55,6 @@
 		</section>
 	</div>
 	{{-- Laravel Mix - JS File --}}
-	<script src="{{ mix('js/laravelplay.js') }}"></script>
+	<script src="{{ asset('/vendor/laravel-play/js/laravelplay.js') }}"></script>
 </body>
 </html>
