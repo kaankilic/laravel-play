@@ -1,10 +1,10 @@
 {
-	"name": "nwidart/laravelplay",
-	"description": "",
+	"name": "kaankilic/laravelplay",
+	"description": "Drivecube installer library for laravel",
 	"authors": [
 		{
-			"name": "Nicolas Widart",
-			"email": "n.widart@gmail.com"
+			"name": "Kaan Kilic",
+			"email": "kiliclarinkaan@gmail.com"
 		}
 	],
 	"extra": {
@@ -12,8 +12,7 @@
 			"providers": [
 				"Modules\\LaravelPlay\\Providers\\LaravelPlayServiceProvider",
 			],
-			"aliases": {
-			}
+			"aliases": {}
 		}
 	},
 	"autoload": {
@@ -22,6 +21,6 @@
 		}
 	},
 	"require": {
-		"spatie/laravel-menu": "^3.4"
+		"php":">=5.5.9"
 	}
 }
