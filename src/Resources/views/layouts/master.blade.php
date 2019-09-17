@@ -7,7 +7,7 @@
 	<title>{{config('app.name')}} Installation</title>
 
 	{{-- Laravel Mix - CSS File --}}
-	<link rel="stylesheet" href="{{ mix('css/laravelplay.css') }}">
+	<link rel="stylesheet" href="{{ asset('/vendor/laravel-play/css/laravelplay.css') }}">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 </head>
 <body>
