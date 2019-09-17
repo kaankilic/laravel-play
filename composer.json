@@ -1,6 +1,7 @@
 {
 	"name": "kaankilic/laravelplay",
 	"description": "Drivecube installer library for laravel",
+	"minimum-stability":"dev",
 	"authors": [
 		{
 			"name": "Kaan Kilic",
