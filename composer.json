@@ -11,8 +11,7 @@
 		"laravel": {
 			"providers": [
 				"Kaankilic\\LaravelPlay\\Providers\\LaravelPlayServiceProvider",
-			],
-			"aliases": {}
+			]
 		}
 	},
 	"autoload": {
