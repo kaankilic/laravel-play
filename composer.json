@@ -1,0 +1,27 @@
+{
+	"name": "nwidart/laravelplay",
+	"description": "",
+	"authors": [
+		{
+			"name": "Nicolas Widart",
+			"email": "n.widart@gmail.com"
+		}
+	],
+	"extra": {
+		"laravel": {
+			"providers": [
+				"Modules\\LaravelPlay\\Providers\\LaravelPlayServiceProvider",
+			],
+			"aliases": {
+			}
+		}
+	},
+	"autoload": {
+		"psr-4": {
+			"Modules\\LaravelPlay\\": ""
+		}
+	},
+	"require": {
+		"spatie/laravel-menu": "^3.4"
+	}
+}
