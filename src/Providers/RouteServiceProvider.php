@@ -12,7 +12,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $moduleNamespace = 'Modules\LaravelPlay\Http\Controllers';
+    protected $moduleNamespace = 'Kaankilic\LaravelPlay\Http\Controllers';
 
     /**
      * Called before routes are registered.
