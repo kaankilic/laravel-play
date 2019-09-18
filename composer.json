@@ -2,6 +2,7 @@
 	"name": "kaankilic/laravel-play",
 	"description": "Drivecube installer library for laravel",
 	"minimum-stability":"dev",
+    "prefer-stable": true,
 	"license":"MIT",
 	"authors": [
 		{
