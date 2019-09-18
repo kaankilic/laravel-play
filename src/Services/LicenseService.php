@@ -4,7 +4,7 @@ namespace Kaankilic\LaravelPlay\Services;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 class LicenseService{
-	protected static $serverEndpoint = 'http://drivecurve.bar';
+	protected static $serverEndpoint = null;
 	protected static $licenseKey = null;
 	protected static $licenseClient = null;
 	protected $response;
@@ -35,13 +35,14 @@ class LicenseService{
 		if(!is_null($client)){
 			static::setClient($client);
 		}
+		static::$serverEndpoint = config("auth.license.server"); 
 		//$this->response = json_decode(file_get_contents(static::$serverEndpoint."/check/".static::$licenseKey));
 		$client = new Client();
 		$res = $client->request('POST', static::$serverEndpoint."/api/verify",[
 			"headers" => [
 				"Content-Type"  => "application/json",
-				"Authorization" => "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6Ijk0MTVkYjk2NDhhOTdmYTdiNWY0ZDIzYWZkMGNkOTk3NWE2ZWRmZGJiNThjMDJmNWRkM2JmMzIyZmY1MTViN2M1YmQ4OTllZmQ1MjdlYWFhIn0.eyJhdWQiOiIxIiwianRpIjoiOTQxNWRiOTY0OGE5N2ZhN2I1ZjRkMjNhZmQwY2Q5OTc1YTZlZGZkYmI1OGMwMmY1ZGQzYmYzMjJmZjUxNWI3YzViZDg5OWVmZDUyN2VhYWEiLCJpYXQiOjE1Njg3Mzg0MzUsIm5iZiI6MTU2ODczODQzNSwiZXhwIjoxNjAwMzYwODM1LCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.f2NUBhNl5zGqg2EFnjYdJNSfCO5oBupgwZaN7fsnF99Up16XQU5vQvx4ofsIypzJh_3Id0qWtjg201fxaHFLEHNaOW9rTwi_UWQS6ntePrxVVPeximtb_InG4AMdZPLJ2ZJ_ceAGo4P2HSGmuNV5W-VNgsciSOSqedXBcWZfCAVcidlJpAhyYNoDP2q34EG9d_KcaiLuHNKmjWqGRMKiNg05k3QU6hEocG_bNbvHEz-fyGrz0dMrOlusAFfzRU-ZJ3nsLxgsHQu1EgIhUOVyhuocuGniUakBjNA877_OQ1S1dG0opmDRMB27pDT68-fa3ps17fzSvkuSVYS77RA2S2dWd3R8WcBG13nuEAsPk56EyGQFfPR2UO2eoAM-l08-YyDSHsyg0ZTgT1OL8CcHWbGQL03AScO9Ep5WDAsnBDNEdlVy8jqLqatZNc5wiXLFyqYNHO7vmDO8Zcn_VDLaKOTe3h7AWrdDP4RGzestHZY4NMrHhF5cCLVdBaRHzvifu1vTtcFfXMCnHKxcLKRV5Kkl1QPRwZ2QKg9yh1AoN9f8ueuhEDeZI56rjqhWxierusMuA6wBSk2SogxXDLojNU9_YKr9xyvbm0Y_XqsqvzBfXWlZmKjEXM73nIQZTQ9vRgZeX_ubHRW2srS_tGEgJlMQ-HZicaYSQXYSra0_DPY",
-				"X-DCKEY" => "6H078R",
+				"Authorization" => config('auth.license.token'),
+				"X-DCKEY" => config('auth.license.dckey'),
 				"Content-Type" => "application/json",
 			],
 			"body" => json_encode([

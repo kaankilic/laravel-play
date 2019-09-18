@@ -38,7 +38,7 @@ class UserController extends Controller
 		$userModel = config("auth.providers.".$userProvider.".model");
 		$user = $userModel::create($inputs);
 		event(new \Kaankilic\LaravelPlay\Events\LaravelPlayed($applicationContainer->toArray(),$user));
-		\Kaankilic\LaravelPlay\Services\EnviromentService::build(\Kaankilic\LaravelPlay\Services\ApplicationService::get()->build(["app_env"=>"production"])->toArray());
+		\Kaankilic\LaravelPlay\Services\EnviromentService::build($applicationContainer->build(["app_env"=>"production"])->toArray());
 		$applicationContainer->delete();
 		return redirect()->to("/");
 	}
