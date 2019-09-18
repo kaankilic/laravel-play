@@ -35,13 +35,13 @@ class LicenseService{
 		if(!is_null($client)){
 			static::setClient($client);
 		}
-		static::$serverEndpoint = config("auth.license.server"); 
+		static::$serverEndpoint = config("auth.license.server");
 		//$this->response = json_decode(file_get_contents(static::$serverEndpoint."/check/".static::$licenseKey));
 		$client = new Client();
 		$res = $client->request('POST', static::$serverEndpoint."/api/verify",[
 			"headers" => [
 				"Content-Type"  => "application/json",
-				"Authorization" => config('auth.license.token'),
+				"Authorization" => "Bearer ".config('auth.license.token'),
 				"X-DCKEY" => config('auth.license.dckey'),
 				"Content-Type" => "application/json",
 			],
