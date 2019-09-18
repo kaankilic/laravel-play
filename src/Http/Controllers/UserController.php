@@ -31,12 +31,11 @@ class UserController extends Controller
 			return redirect()->route("laravelplay::home");
 		}
 		$inputs = $request->only(["name","email","password"]);
+		$inputs["password"] = bcrypt($inputs['password']);
 		$inputs = array_merge(config("laravelplay.defaults.user"),$inputs);
-		\App\Models\Users::create([
-			'name' => $inputs['name'],
-			'email' => $inputs['email'],
-			'password' => bcrypt($inputs['password'])
-		]);
+		$userProvider = config("auth.guards.web.provider");
+		$userModel = config("auth.providers.".$userProvider.".model");
+		$userModel::create($inputs);
 		\Kaankilic\LaravelPlay\Services\ApplicationService::get()->delete();
 		return redirect()->to("/");
 	}
