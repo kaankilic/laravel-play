@@ -9,8 +9,8 @@ use Illuminate\Broadcasting\InteractsWithSockets;
 class LaravelPlayed
 {
 	use Dispatchable, InteractsWithSockets, SerializesModels;
-	protected $user;
-	protected $app;
+	public $user;
+	public $app;
 	/**
 	* Create a new event instance.
 	*
