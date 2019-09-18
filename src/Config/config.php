@@ -23,6 +23,7 @@ return [
 		'bootstrap/cache/'       => '775',
 	],
 	'defaults' => [
-		'user' => []
+		'user' => [],
+		'installed_event' => null
 	]
 ];

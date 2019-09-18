@@ -26,7 +26,8 @@ class UserController extends Controller
 	* @return Response
 	*/
 	public function create(Request $request){
-		$hasKey = \Kaankilic\LaravelPlay\Services\ApplicationService::get()->hasKey(["db_host","db_database","db_username","db_password","app_name","app_url"]);
+		$applicationContainer = \Kaankilic\LaravelPlay\Services\ApplicationService::get();
+		$hasKey = $applicationContainer->hasKey(["db_host","db_database","db_username","db_password","app_name","app_url"]);
 		if(!$hasKey){
 			return redirect()->route("laravelplay::home");
 		}
@@ -35,8 +36,9 @@ class UserController extends Controller
 		$inputs = array_merge(config("laravelplay.defaults.user"),$inputs);
 		$userProvider = config("auth.guards.web.provider");
 		$userModel = config("auth.providers.".$userProvider.".model");
-		$userModel::create($inputs);
-		\Kaankilic\LaravelPlay\Services\ApplicationService::get()->delete();
+		$user = $userModel::create($inputs);
+		event(new \Kaankilic\LaravelPlay\Events\LaravelPlayed($applicationContainer->toArray(),$user));
+		$applicationContainer->delete();
 		return redirect()->to("/");
 	}
 }
