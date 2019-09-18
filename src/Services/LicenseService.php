@@ -4,7 +4,7 @@ namespace Kaankilic\LaravelPlay\Services;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Client;
 class LicenseService{
-	protected static $serverEndpoint = 'http://drivecurve.bar';
+	protected static $serverEndpoint = 'http://verify.kaankilic.com';
 	protected static $licenseKey = null;
 	protected static $licenseClient = null;
 	protected $response;
