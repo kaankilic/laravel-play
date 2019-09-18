@@ -31,6 +31,7 @@ class UserController extends Controller
 			return redirect()->route("laravelplay::home");
 		}
 		$inputs = $request->only(["name","email","password"]);
+		$inputs = array_merge(config("laravelplay.defaults.user"),$inputs);
 		\App\Models\Users::create([
 			'name' => $inputs['name'],
 			'email' => $inputs['email'],
