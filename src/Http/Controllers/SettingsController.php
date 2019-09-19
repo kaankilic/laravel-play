@@ -14,7 +14,7 @@ class SettingsController extends Controller
 	* @return Response
 	*/
 	public function index(){
-		$applicationService = \Kaankilic\LaravelPlay\Services\ApplicationService::get();
+		$applicationService = $applicationService;
 		if(!$applicationService->hasKey(["db_host","db_database","db_username","db_password"])){
 			return redirect()->route("laravelplay::home");
 		}
@@ -33,12 +33,13 @@ class SettingsController extends Controller
 	* @return Response
 	*/
 	public function check(Request $request){
-		$hasKey = \Kaankilic\LaravelPlay\Services\ApplicationService::get()->hasKey(["db_host","db_database","db_username","db_password"]);
+		$applicationService = \Kaankilic\LaravelPlay\Services\ApplicationService::get();
+		$hasKey = $applicationService->hasKey(["db_host","db_database","db_username","db_password"]);
 		if(!$hasKey){
 			return redirect()->route("laravelplay::home");
 		}
 		$inputs = $request->only(["app_name","app_url"]);
-		$application = \Kaankilic\LaravelPlay\Services\ApplicationService::get()->build([
+		$application = $applicationService->build([
 			'app_env'		=> 'local',
 			'app_name'		=> $inputs["app_name"],
 			'app_url'		=> $inputs["app_url"]
@@ -46,7 +47,13 @@ class SettingsController extends Controller
 		$output = new BufferedOutput();
 		Artisan::call('optimize:clear',[],$output);
 		\Log::info($output->fetch());
-		\Kaankilic\LaravelPlay\Services\EnviromentService::build(\Kaankilic\LaravelPlay\Services\ApplicationService::get()->toArray());
+		\Kaankilic\LaravelPlay\Services\EnviromentService::build($applicationService->toArray());
+		config([
+			"database.connections.mysql.host" => $applicationService->toArray()["host"],
+			"database.connections.mysql.username" => $applicationService->toArray()["db_username"],
+			"database.connections.mysql.password" => $applicationService->toArray()["db_password"],
+			"database.connections.mysql.database" => $applicationService->toArray()["db_name"]
+		]);
 		Artisan::call('migrate:fresh',[
 			'--force' => true
 		],$output);
