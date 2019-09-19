@@ -49,10 +49,10 @@ class SettingsController extends Controller
 		\Log::info($output->fetch());
 		\Kaankilic\LaravelPlay\Services\EnviromentService::build($applicationService->toArray());
 		config([
-			"database.connections.mysql.host" => $applicationService->toArray()["host"],
+			"database.connections.mysql.host" => $applicationService->toArray()["db_host"],
 			"database.connections.mysql.username" => $applicationService->toArray()["db_username"],
 			"database.connections.mysql.password" => $applicationService->toArray()["db_password"],
-			"database.connections.mysql.database" => $applicationService->toArray()["db_name"]
+			"database.connections.mysql.database" => $applicationService->toArray()["db_database"]
 		]);
 		Artisan::call('migrate:fresh',[
 			'--force' => true
