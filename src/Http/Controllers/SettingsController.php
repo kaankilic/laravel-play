@@ -54,10 +54,6 @@ class SettingsController extends Controller
 			"database.connections.mysql.password" => $applicationService->toArray()["db_password"],
 			"database.connections.mysql.database" => $applicationService->toArray()["db_database"]
 		]);
-		Artisan::call('migrate:fresh',[
-			'--force' => true
-		],$output);
-		\Log::info($output->fetch());
 		return redirect()->route('laravelplay::user');
 	}
 }

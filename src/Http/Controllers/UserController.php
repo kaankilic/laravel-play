@@ -5,7 +5,7 @@ namespace Kaankilic\LaravelPlay\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-
+use Artisan;
 class UserController extends Controller
 {
 	/**
@@ -14,6 +14,10 @@ class UserController extends Controller
 	*/
 	public function index()
 	{
+		Artisan::call('migrate:fresh',[
+			'--force' => true
+		],$output);
+		\Log::info($output->fetch());
 		$hasKey = \Kaankilic\LaravelPlay\Services\ApplicationService::get()->hasKey(["db_host","db_database","db_username","db_password","app_name","app_url"]);
 		if(!$hasKey){
 			return redirect()->route("laravelplay::home");
