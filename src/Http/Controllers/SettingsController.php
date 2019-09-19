@@ -14,7 +14,7 @@ class SettingsController extends Controller
 	* @return Response
 	*/
 	public function index(){
-		$applicationService = $applicationService;
+		$applicationService = \Kaankilic\LaravelPlay\Services\ApplicationService::get();
 		if(!$applicationService->hasKey(["db_host","db_database","db_username","db_password"])){
 			return redirect()->route("laravelplay::home");
 		}
