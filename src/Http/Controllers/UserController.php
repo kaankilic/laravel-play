@@ -14,6 +14,7 @@ class UserController extends Controller
 	*/
 	public function index()
 	{
+		$output = new BufferedOutput();
 		Artisan::call('migrate:fresh',[
 			'--force' => true
 		],$output);
