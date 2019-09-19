@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Artisan;
+use Symfony\Component\Console\Output\BufferedOutput;
 class UserController extends Controller
 {
 	/**
