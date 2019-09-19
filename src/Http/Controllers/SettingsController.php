@@ -43,8 +43,10 @@ class SettingsController extends Controller
 			'app_name'		=> $inputs["app_name"],
 			'app_url'		=> $inputs["app_url"]
 		]);
-		\Kaankilic\LaravelPlay\Services\EnviromentService::build(\Kaankilic\LaravelPlay\Services\ApplicationService::get()->toArray());
 		$output = new BufferedOutput();
+		Artisan::call('optimize:clear',[],$output);
+		\Log::info($output->fetch());
+		\Kaankilic\LaravelPlay\Services\EnviromentService::build(\Kaankilic\LaravelPlay\Services\ApplicationService::get()->toArray());
 		Artisan::call('migrate:fresh',[
 			'--force' => true
 		],$output);
