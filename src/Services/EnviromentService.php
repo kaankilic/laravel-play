@@ -26,8 +26,8 @@ class EnviromentService{
 					$contents .= $value . PHP_EOL;
 				}
 			}
-			$contents .= "APP_KEY=".env("APP_KEY");
-			$contents .= "JWT_SECRET=".env("JWT_SECRET");
+			$contents .= "APP_KEY=".env("APP_KEY")."\n";
+			$contents .= "JWT_SECRET=".env("JWT_SECRET")."\n";
 			$finder->put(base_path(self::ENVIROMENT_FILE), $contents);
 		}
 		$output = new BufferedOutput();
