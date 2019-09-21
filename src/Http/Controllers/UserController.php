@@ -20,6 +20,15 @@ class UserController extends Controller
 			'--force' => true
 		],$output);
 		\Log::info($output->fetch());
+		if(count(config('laravelplay.seeds'))>0){
+			$seeds = config('laravelplay.seeds');
+			foreach($seed as $seeds){
+				Artisan::class('db:seed',[
+					'--class' => $seed
+				],$output);
+				\Log::info($output->fetch());
+			}
+		}
 		$hasKey = \Kaankilic\LaravelPlay\Services\ApplicationService::get()->hasKey(["db_host","db_database","db_username","db_password","app_name","app_url"]);
 		if(!$hasKey){
 			return redirect()->route("laravelplay::home");
