@@ -17,7 +17,7 @@ class UserController extends Controller
 	{
 		$output = new BufferedOutput();
 		Artisan::call('migrate:fresh',[
-			'--seed' => true
+			'--seed' => true,
 			'--force' => true
 		],$output);
 		\Log::info($output->fetch());
