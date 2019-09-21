@@ -17,18 +17,10 @@ class UserController extends Controller
 	{
 		$output = new BufferedOutput();
 		Artisan::call('migrate:fresh',[
+			'--seed' => true
 			'--force' => true
 		],$output);
 		\Log::info($output->fetch());
-		if(count(config('laravelplay.seeds'))>0){
-			$seeds = config('laravelplay.seeds');
-			foreach($seeds as $seed){
-				Artisan::class('db:seed',[
-					'--class' => $seed
-				],$output);
-				\Log::info($output->fetch());
-			}
-		}
 		$hasKey = \Kaankilic\LaravelPlay\Services\ApplicationService::get()->hasKey(["db_host","db_database","db_username","db_password","app_name","app_url"]);
 		if(!$hasKey){
 			return redirect()->route("laravelplay::home");

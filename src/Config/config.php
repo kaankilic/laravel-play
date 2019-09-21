@@ -26,5 +26,5 @@ return [
 		'user' => [],
 		'installed_event' => null
 	],
-	'seeds' => []
+	'has_default_seeds' => false
 ];
