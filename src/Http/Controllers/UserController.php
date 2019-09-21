@@ -22,7 +22,7 @@ class UserController extends Controller
 		\Log::info($output->fetch());
 		if(count(config('laravelplay.seeds'))>0){
 			$seeds = config('laravelplay.seeds');
-			foreach($seed as $seeds){
+			foreach($seeds as $seed){
 				Artisan::class('db:seed',[
 					'--class' => $seed
 				],$output);
