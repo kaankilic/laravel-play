@@ -37,26 +37,31 @@ class LicenseService{
 		}
 		static::$serverEndpoint = config("auth.license.server");
 		//$this->response = json_decode(file_get_contents(static::$serverEndpoint."/check/".static::$licenseKey));
-		$client = new Client([
-			"base_uri" => static::$serverEndpoint,
-			"debug" => true,
-			'allow_redirects' => false,
-			'http_errors' => false
-		]);
-		$res = $client->request("POST","/api/verify",[
-			"headers" => [
-				"Content-Type"  => "application/json",
-				"Authorization" => "Bearer ".config('auth.license.token'),
-				"X-DCKEY" => config('auth.license.dckey'),
-				"Content-Type" => "application/json",
-				"Accept"		=> "application/json"
-			],
-			"body" => json_encode([
-				"license_code" => static::$licenseKey,
-				"client" => static::$licenseClient
-			])
-		]);
-		$this->response = json_decode($res->getBody()->getContents());
+		try{
+			$client = new Client([
+				"base_uri" => static::$serverEndpoint,
+				"debug" => true,
+				'allow_redirects' => false,
+				'http_errors' => false
+			]);
+			$res = $client->request("POST","/api/verify",[
+				"headers" => [
+					"Content-Type"  => "application/json",
+					"Authorization" => "Bearer ".config('auth.license.token'),
+					"X-DCKEY" => config('auth.license.dckey'),
+					"Content-Type" => "application/json",
+					"Accept"		=> "application/json"
+				],
+				"body" => json_encode([
+					"license_code" => static::$licenseKey,
+					"client" => static::$licenseClient
+				])
+			]);
+			$this->response = json_decode($res->getBody()->getContents());
+		}catch(\Exception $exception){
+			\Log::info($exception->getMessage());
+			return false;
+		}
 		if($res->getStatusCode()!="200"){
 			\Log::error("verification connectivity issue.");
 			return false;
